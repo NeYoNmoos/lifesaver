@@ -25,11 +25,60 @@ class WebpageTimer extends HTMLElement {
     constructor() {
         // Always call super first in constructor
         super();
+
+        // Initial state
+        this.isEditing = false;
     }
 
     connectedCallback() {
         const shadowRoot = this.attachShadow({ mode: 'open' });
         shadowRoot.appendChild(webpageTimer.content);
+
+        // Get elements inside the shadow DOM
+        const editButton = shadowRoot.querySelector('.bg-blue-500');
+        const blockButton = shadowRoot.querySelector('.bg-red-500');
+        const canvas = shadowRoot.querySelector('canvas');
+        const inputField = document.createElement('input');
+
+        // Hide input field initially
+        inputField.style.display = 'none';
+
+        // Set event listeners
+        editButton.addEventListener('click', () => {
+            if (!this.isEditing) {
+                this.isEditing = true;
+                // Toggle between canvas and input field
+                canvas.style.display = 'none';
+                inputField.style.display = 'block';
+                inputField.value = canvas.getAttribute('alt'); // Use some attribute for initial value
+                // Toggle between buttons
+                editButton.innerHTML = '<i class="fas fa-check"></i> Submit';
+                blockButton.innerHTML = '<i class="fas fa-times"></i> Cancel';
+            } else {
+                // Submit logic (save the edited value, etc.)
+                // ...
+
+                // Toggle back to view mode
+                this.isEditing = false;
+                canvas.style.display = 'block';
+                inputField.style.display = 'none';
+                // Toggle buttons back
+                editButton.innerHTML = '<i class="fas fa-pen"></i> Edit';
+                blockButton.innerHTML = '<i class="fas fa-ban"></i> Block';
+            }
+        });
+
+        blockButton.addEventListener('click', () => {
+            // Reset to initial state if canceled
+            this.isEditing = false;
+            canvas.style.display = 'block';
+            inputField.style.display = 'none';
+            editButton.innerHTML = '<i class="fas fa-pen"></i> Edit';
+            blockButton.innerHTML = '<i class="fas fa-ban"></i> Block';
+        });
+
+        // Append input field to the shadow DOM
+        shadowRoot.appendChild(inputField);
     }
 }
 
