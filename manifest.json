@@ -4,21 +4,21 @@
     "version": "1.0",
     "description": "With this extension you can view and change your behaviour about spending time on webpages",
     "icons": {
-      "48": "icons/icon.png"
+      "48": "icons/lifesaverlogo.png"
     },
     "action": {
-      "default_popup": "popup.html",
+      "default_popup": "/popup/popup.html",
       "default_icon": {
-        "16": "icons/icon-16.png",
-        "48": "icons/icon-48.png",
-        "128": "icons/icon-128.png"
+        "16": "icons/lifesaverlogo25.png",
+        "48": "icons/lifesaverlogo50.png",
+        "128": "icons/lifesaverlogo.png"
       }
     },
     "permissions": [
       "storage", "tabs", "activeTab"
     ],
     "background": {
-      "service_worker": "sripts/background.js"
+      "service_worker": "scripts/background.js"
     }
   }
   
