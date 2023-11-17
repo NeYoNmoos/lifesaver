@@ -1,31 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <style>
-      .test{
-        @apply bg-secondary
-      }
-
-      .item-unselected{
-        @apply text-xl border-t border-accent font-semibold bg-secondary px-10 py-5
-      }
-
-      .item-selected{
-        @apply bg-primary text-xl border-t border-accent font-semibold bg-secondary px-10 py-5
-      }
-    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/dist/styles.css" rel="stylesheet" />
     <title>Lifesaver</title>
-    <script src="header.js"></script>
+    <script src="../components/header.js"></script>
+    <style>
+      .load-text{
+        @apply text-text
+      }
+
+      .load-background{
+        @apply bg-background
+      }
+
+      .load-bg-primary{
+          @apply bg-primary
+      }
+
+      .load-bg-secondary{
+          @apply bg-secondary
+      }
+
+      .load-accent{
+          @apply bg-accent
+      }
+    </style>
   </head>
   <body class="bg-background h-screen flex flex-row">
     <header-component></header-component>
-    <main>
-      <div>
-        <h1>Summary</h1>
-        <h1>Daily</h1>
+    <main class="grow p-10">
+      <div></div>
+      <div class="flex flex-row justify-between ">
+        <h1 class="text-5xl">Summary</h1>
+        <h1 class="text-5xl">Daily</h1>
+      </div>
+      <div class="grow bg-secondary mt-10 flex flex-row">
+        <div class="bg-primary p-6 px-10 justify-between grow">
+          <h2 class="text-xl text-center">Max</h2>
+          <p class="text-center text-base">spended time</p>
+        </div>
+        <div class="bg-secondary p-6 px-10 justify-between grow border-l border-accent">
+          <h2 class="text-xl text-center">Min</h2>
+          <p class="text-center text-base">spended time</p>
+        </div>
+        <div class="bg-secondary p-6 px-10 justify-between grow border-l border-accent">
+          <h2 class="text-xl text-center">Min</h2>
+          <p class="text-center text-base">in percentage</p>
+        </div>
+        <div class="bg-secondary p-6 px-10 justify-between grow border-l border-accent">
+          <h2 class="text-xl text-center">Min</h2>
+          <p class="text-center text-base">in percentage</p>
+        </div>
       </div>
     </main>
   </body>

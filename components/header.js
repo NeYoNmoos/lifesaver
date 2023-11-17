@@ -6,7 +6,7 @@ headerTemplate.innerHTML = `
 @import url('/dist/styles.css');
 
 </style>
-<header class="bg-accent flex flex-col">
+<header class="bg-accent h-screen flex flex-col">
     <a class="text-xl font-semibold bg-primary px-10 py-5" href="#">Summary</a>
     <a class="text-xl border-t border-accent font-semibold bg-secondary px-10 py-5" href="#">Calender</a>
     <a class="text-xl border-t border-accent font-semibold bg-secondary px-10 py-5" href="#">Limits</a>
