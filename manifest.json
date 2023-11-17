@@ -19,6 +19,12 @@
     ],
     "background": {
       "service_worker": "scripts/background.js"
-    }
+    },
+    "web_accessible_resources": [
+      {
+          "resources": ["/components/fullcalendar/dist/index.min.js", "/components/fullcalendar/dist/index.global.js"],
+          "matches": ["<all_urls>"]
+      }
+  ]
   }
   
