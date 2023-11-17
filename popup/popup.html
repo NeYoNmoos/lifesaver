@@ -4,12 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Popup</title>
+    <link href="/dist/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="">
+    <div class="w-32 h-32">
       test
-      <button id="openTabButton">Details</button>
+      <button class="btn btn-blue" id="openTabButton">Details</button>
     </div>
     <script src="popup.js"></script>
   </body>
 </html>
+
+<style>
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
+</style>

@@ -1,0 +1,20 @@
+{
+  "name": "lifesaver",
+  "version": "1.0.0",
+  "description": "- save your time in the web to get more of the things done, that you actually want!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss build styles/tailwind.css -o dist/styles.css",
+    "watch": "watch 'npm run build' ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "watch": "^1.0.2"
+  }
+}
