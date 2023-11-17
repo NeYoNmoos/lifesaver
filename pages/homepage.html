@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <style>
-      .test{
-        @apply bg-secondary
-      }
-
-      .item-unselected{
-        @apply text-xl border-t border-accent font-semibold bg-secondary px-10 py-5
-      }
-
-      .item-selected{
-        @apply bg-primary text-xl border-t border-accent font-semibold bg-secondary px-10 py-5
-      }
-    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/dist/styles.css" rel="stylesheet" />
     <title>Lifesaver</title>
-    <script src="header.js"></script>
+    <script src="../components/header.js"></script>
+    <style>
+      .load-text{
+        @apply text-text
+      }
+
+      .load-background{
+        @apply bg-background
+      }
+
+      .load-bg-primary{
+          @apply bg-primary
+      }
+
+      .load-bg-secondary{
+          @apply bg-secondary
+      }
+
+      .load-accent{
+          @apply bg-accent
+      }
+    </style>
   </head>
   <body class="bg-background h-screen flex flex-row">
     <header-component></header-component>

@@ -1,0 +1,19 @@
+.load-text{
+    @apply text-text
+  }
+
+  .load-background{
+    @apply bg-background
+  }
+
+  .load-bg-primary{
+      @apply bg-primary
+  }
+
+  .load-bg-secondary{
+      @apply bg-secondary
+  }
+
+  .load-accent{
+      @apply bg-accent
+  }
