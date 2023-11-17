@@ -16,6 +16,10 @@ function getCurrentDate() {
   return new Date().toISOString().split("T")[0]; // Gets the current date in YYYY-MM-DD format
 }
 
+function getFaviconUrl(domain) {
+  return `https://www.google.com/s2/favicons?domain=${domain}`;
+}
+
 function updateTimeSpent() {
   if (activeDomain && startTime) {
     const endTime = Date.now();
@@ -34,6 +38,7 @@ function updateTimeSpent() {
       start: new Date(startTime).toISOString(),
       end: new Date(endTime).toISOString(),
       duration: timeSpent,
+      favicon: getFaviconUrl(activeDomain),
     });
 
     chrome.storage.local.set({ browsingHistory }, function () {
