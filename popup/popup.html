@@ -5,14 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Popup</title>
     <link href="/dist/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-v0RxpX1bZR8OI+Y0QmPkqUCmpeKKy29U5FVkfMZZ3pIp/zw0ZRTEz5PnI3ZCqteM4EaXln0QsCCmSDZb0oB5wQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   </head>
-  <body>
-    <div class="w-32 h-32">
-      test
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+      <div class="mb-8">
+        <h1 class="text-2xl font-bold mb-2">Current Page</h1>
+        <p class="text-gray-600">Current page name</p>
+        <div class="flex space-x-4 items-center mt-4">
+          <img class="w-16 h-16 border" src="your-image-source.jpg">
+          <canvas class="w-16 h-16 border"></canvas>
+          <button class="bg-blue-500 text-white px-4 py-2 rounded">
+            <i class="fas fa-pen"></i> Edit
+          </button>
+          <button class="bg-red-500 text-white px-4 py-2 rounded">
+            <i class="fas fa-ban"></i> Block
+          </button>
+        </div>
+      </div>
+  
       <button class="btn btn-blue" id="openTabButton">Details</button>
     </div>
     <script src="popup.js"></script>
   </body>
+  
 </html>
 
 <style>
