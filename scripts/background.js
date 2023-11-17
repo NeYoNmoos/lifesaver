@@ -1,12 +1,10 @@
 let startTime;
 let activeDomain;
-let domainTimes = {};
+let browsingHistory = {};
 
 function getDomain(url) {
   try {
     const hostname = new URL(url).hostname;
-    // Extract the domain. This will include subdomains.
-    // Adjust as needed (e.g., removing 'www').
     return hostname;
   } catch (e) {
     console.error("Error parsing URL:", e);
@@ -14,20 +12,51 @@ function getDomain(url) {
   }
 }
 
+function getCurrentDate() {
+  return new Date().toISOString().split("T")[0]; // Gets the current date in YYYY-MM-DD format
+}
+
+function getFaviconUrl(domain) {
+  return `https://www.google.com/s2/favicons?domain=${domain}`;
+}
+
+function updateTimeSpent() {
+  if (activeDomain && startTime) {
+    const endTime = Date.now();
+    const timeSpent = endTime - startTime;
+    const currentDate = getCurrentDate();
+
+    if (!browsingHistory[currentDate]) {
+      browsingHistory[currentDate] = {};
+    }
+
+    if (!browsingHistory[currentDate][activeDomain]) {
+      browsingHistory[currentDate][activeDomain] = [];
+    }
+
+    browsingHistory[currentDate][activeDomain].push({
+      start: new Date(startTime).toISOString(),
+      end: new Date(endTime).toISOString(),
+      duration: timeSpent,
+      favicon: getFaviconUrl(activeDomain),
+    });
+
+    chrome.storage.local.set({ browsingHistory }, function () {
+      console.log(
+        `Browsing history updated for ${activeDomain} on ${currentDate}`
+      );
+    });
+
+    startTime = undefined; // Reset startTime for the next session
+  }
+}
+
 chrome.tabs.onActivated.addListener((activeInfo) => {
   chrome.tabs.get(activeInfo.tabId, (tab) => {
-    console.log("trying to get tab data!");
     if (tab.url) {
       const domain = getDomain(tab.url);
-
       if (domain) {
-        if (activeDomain && startTime) {
-          const timeSpent = Date.now() - startTime;
-          domainTimes[activeDomain] =
-            (domainTimes[activeDomain] || 0) + timeSpent;
-          chrome.storage.local.set({ domainTimes });
-        }
-
+        updateTimeSpent(); // Update time spent on the previous domain
         startTime = Date.now();
         activeDomain = domain;
       }
@@ -36,20 +65,17 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  // Additional listener to handle URL changes in the same tab
   if (tab.active && changeInfo.url) {
     const domain = getDomain(changeInfo.url);
-
     if (domain && domain !== activeDomain) {
-      if (activeDomain && startTime) {
-        const timeSpent = Date.now() - startTime;
-        domainTimes[activeDomain] =
-          (domainTimes[activeDomain] || 0) + timeSpent;
-        chrome.storage.local.set({ domainTimes });
-      }
-
+      updateTimeSpent(); // Update time spent on the previous domain
       startTime = Date.now();
       activeDomain = domain;
     }
   }
+});
+
+chrome.tabs.onRemoved.addListener(() => {
+  updateTimeSpent(); // Update time when a tab is closed
+  activeDomain = undefined;
 });
