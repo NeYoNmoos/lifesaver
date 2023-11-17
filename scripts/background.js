@@ -1,6 +1,6 @@
 let startTime;
 let activeDomain;
-let domainTimes = {};
+let browsingHistory = {};
 
 function getDomain(url) {
   try {
@@ -12,16 +12,37 @@ function getDomain(url) {
   }
 }
 
+function getCurrentDate() {
+  return new Date().toISOString().split("T")[0]; // Gets the current date in YYYY-MM-DD format
+}
+
 function updateTimeSpent() {
   if (activeDomain && startTime) {
-    const timeSpent = Date.now() - startTime;
-    domainTimes[activeDomain] = (domainTimes[activeDomain] || 0) + timeSpent;
+    const endTime = Date.now();
+    const timeSpent = endTime - startTime;
+    const currentDate = getCurrentDate();
 
-    chrome.storage.local.set({ domainTimes }, function () {
+    if (!browsingHistory[currentDate]) {
+      browsingHistory[currentDate] = {};
+    }
+
+    if (!browsingHistory[currentDate][activeDomain]) {
+      browsingHistory[currentDate][activeDomain] = [];
+    }
+
+    browsingHistory[currentDate][activeDomain].push({
+      start: new Date(startTime).toISOString(),
+      end: new Date(endTime).toISOString(),
+      duration: timeSpent,
+    });
+
+    chrome.storage.local.set({ browsingHistory }, function () {
       console.log(
-        `Time updated for ${activeDomain}: ${domainTimes[activeDomain]}`
+        `Browsing history updated for ${activeDomain} on ${currentDate}`
       );
     });
+
+    startTime = undefined; // Reset startTime for the next session
   }
 }
 
@@ -51,6 +72,5 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 chrome.tabs.onRemoved.addListener(() => {
   updateTimeSpent(); // Update time when a tab is closed
-  startTime = undefined;
   activeDomain = undefined;
 });
