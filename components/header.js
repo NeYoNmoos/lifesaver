@@ -7,11 +7,11 @@ headerTemplate.innerHTML = `
 
 </style>
 <header class="bg-accent h-screen flex flex-col">
-    <a class="text-xl font-semibold bg-primary px-10 py-5" href="#">Summary</a>
-    <a class="text-xl border-t border-accent font-semibold bg-secondary px-10 py-5" href="#">Calender</a>
-    <a class="text-xl border-t border-accent font-semibold bg-secondary px-10 py-5" href="#">Limits</a>
-    <a class="text-xl border-t border-accent font-semibold bg-secondary px-10 py-5" href="#">Statistics</a>
-    <a class="text-xl border-t border-accent font-semibold bg-secondary px-10 py-5" href="#">Settings</a>
+    <a id="summary" class="text-xl font-semibold px-10 py-5" href="homepage.html">Summary</a>
+    <a id="calendar" class="text-xl border-t border-accent font-semibold px-10 py-5" href="calendar.html">Calendar</a>
+    <a id="limits" class="text-xl border-t border-accent font-semibold px-10 py-5" href="limits.html">Limits</a>
+    <a id="statistics" class="text-xl border-t border-accent font-semibold px-10 py-5" href="statistics.html">Statistics</a>
+    <a id="settings" class="text-xl border-t border-accent font-semibold px-10 py-5" href="settings.html">Settings</a>
 </header>
 `
 
@@ -24,6 +24,18 @@ class Header extends HTMLElement {
     connectedCallback() {
         const shadowRoot = this.attachShadow({ mode: 'open' });
         shadowRoot.appendChild(headerTemplate.content);
+    
+        // Access and use attributes in connectedCallback
+        const dataText = this.getAttribute('page');
+        
+        const links = shadowRoot.querySelectorAll('a');
+        links.forEach(link => {
+        if (link.id !== dataText) {
+            link.classList.add('bg-secondary'); // Set your desired color
+        }else{
+            link.classList.add('bg-primary');
+        }
+        });
     }
 }
 
