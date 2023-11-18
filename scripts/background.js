@@ -1,6 +1,7 @@
 let startTime;
 let activeDomain;
 let browsingHistory = {};
+let limits=[];
 const MINIMUM_DURATION_MS = 10000; // 30 seconds threshold
 
 function getDomain(url) {
@@ -44,6 +45,7 @@ function updateTimeSpent() {
         duration: timeSpent,
         favicon: getFaviconUrl(activeDomain),
       });
+
 
       chrome.storage.local.set({ browsingHistory }, function () {
         console.log(

@@ -26,6 +26,8 @@
           @apply bg-accent
       }
     </style>
+        <script src="limits.js"></script>
+
     <script src="../components/header.js"></script>
   </head>
     <body class="bg-background h-screen flex flex-row">
@@ -34,21 +36,22 @@
           <div class="flex flex-row justify-between ">
             <h1 class="text-5xl">Limits</h1>
           </div>
-          <form class="flex flex-col" action="/submit" method="post">
+          <form class="flex flex-col" >
             <div class="rounded-3xl grow bg-accent pl-6 p-4 mt-10 flex flex-row justify-between items-center">
               <h2 class="text-xl text-center font-semibold w-1/12">Url:</h2>
-              <input class="rounded-2xl bg-background grow box-border p-4 ml-4 text-xl w-11/12" type="url" id="url" name="name" required>
+              <input class="rounded-2xl bg-background grow box-border p-4 ml-4 text-xl w-11/12" id="url" name="name" required>
             </div>
             <div class="flex flex-row">
               <div class="rounded-3xl w-1/2 bg-accent pl-6 p-4 mt-10 flex flex-row justify-between items-center">
                 <h2 class="px-4 text-xl text-center font-semibold w-3/12">Limit:</h2>
-                <input class="text-center rounded-2xl bg-background grow box-border p-4 ml-4 text-xl w-5/12" value="hh:mm" type="url" id="url" name="name" required>
+                <input class="text-center rounded-2xl bg-background grow box-border p-4 ml-4 text-xl w-5/12" value="hh:mm" id="time" name="name" required>
               </div>
               <div class="rounded-3xl w-1/2 bg-accent px-6 p-4 mt-10 flex flex-row justify-between items-center ml-4">
-                <button class="bg-primary p-4 rounded-2xl text-xl grow" type="submit">Submit</button>
+                <button class="bg-primary p-4 rounded-2xl text-xl grow" id="submit">Submit</button>
               </div>
             </div>
           </form>
+          <div id="limitsContainer"></div>
         </main>
     </body>
   </body>
