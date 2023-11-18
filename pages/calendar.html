@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/styles.css" rel="stylesheet" />
+    <title>Lifesaver</title>
+    <script src="../components/header.js"></script>
+    <script src="../components/calendar-component.js" type="module"></script>
+
+    <style>
+      .load-text{
+        @apply text-text
+      }
+
+      .load-background{
+        @apply bg-background
+      }
+
+      .load-bg-primary{
+          @apply bg-primary
+      }
+
+      .load-bg-secondary{
+          @apply bg-secondary
+      }
+
+      .load-accent{
+          @apply bg-accent
+      }
+    </style>
+  </head>
+  <body class="bg-background h-screen flex flex-row">
+    <header-component page="calendar"></header-component>
+    <main class="grow p-10">
+        <div class="flex flex-row justify-between ">
+            <h1 class="text-5xl">Calendar</h1>
+        </div>
+        <div class="mt-10">
+            <chart-component></chart-component>
+    
+            <calendar-component></calendar-component>
+        </div>    
+    </main>
+    </body>
+</html>
+    

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/dist/styles.css" rel="stylesheet" />
     <title>Lifesaver</title>
-    <script src="../components/header.js"></script>
     <style>
       .load-text{
         @apply text-text
@@ -27,9 +26,10 @@
           @apply bg-accent
       }
     </style>
+    <script src="../components/header.js"></script>
   </head>
     <body class="bg-background h-screen flex flex-row">
-        <header-component></header-component>
+        <header-component page="limits"></header-component>
         <main class="grow p-10">
           <div class="flex flex-row justify-between ">
             <h1 class="text-5xl">Limits</h1>
@@ -39,13 +39,13 @@
               <h2 class="text-xl text-center font-semibold w-1/12">Url:</h2>
               <input class="rounded-2xl bg-background grow box-border p-4 ml-4 text-xl w-11/12" type="url" id="url" name="name" required>
             </div>
-            <div class="rounded-3xl grow bg-accent pl-6 p-4 mt-10 flex flex-row">
-              <div class="w-4/12 flex flex-row justify-between items-center">
-                <h2 class="text-xl text-center font-semibold w-1/12">Limit:</h2>
-                <input class="rounded-2xl bg-background grow box-border p-4 ml-4 text-xl w-11/12" value="hh:mm" type="url" id="url" name="name" required>
+            <div class="flex flex-row">
+              <div class="rounded-3xl w-1/2 bg-accent pl-6 p-4 mt-10 flex flex-row justify-between items-center">
+                <h2 class="px-4 text-xl text-center font-semibold w-3/12">Limit:</h2>
+                <input class="text-center rounded-2xl bg-background grow box-border p-4 ml-4 text-xl w-5/12" value="hh:mm" type="url" id="url" name="name" required>
               </div>
-              <div class="w-1/2">
-
+              <div class="rounded-3xl w-1/2 bg-accent px-6 p-4 mt-10 flex flex-row justify-between items-center ml-4">
+                <button class="bg-primary p-4 rounded-2xl text-xl grow" type="submit">Submit</button>
               </div>
             </div>
           </form>
