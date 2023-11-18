@@ -35,22 +35,11 @@ class WebpageTimer extends HTMLElement {
         this.isEditing = false;
       }
 
-    loadEvents() {
-    chrome.storage.local.get(["browsingHistory"], (result) => {
-        if (result.browsingHistory) {
-        const events = this.processEvents(result.browsingHistory);
-        events.forEach((event) => {console.log(event)});
-        }
-    });
-    }
-
   connectedCallback() {
-
-    this.loadEvent();
     
     const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.appendChild(webpageTimer.content);
-
+/*
     // Get elements inside the shadow DOM
     const editButton = shadowRoot.querySelector('.bg-blue-500');
     const blockButton = shadowRoot.querySelector('.bg-red-500');
@@ -90,35 +79,8 @@ class WebpageTimer extends HTMLElement {
       editButton.innerHTML = '<i class="fas fa-pen"></i> Edit';
       blockButton.innerHTML = '<i class="fas fa-ban"></i> Block';
     });
-  }
-
-
-  
-  load3LongestEvents() {
-    // chrome.storage.local.get(console.log);
-/*
-      if (result.browsingHistory) {
-        const currentDate = new Date().toISOString().split('T')[0];
-        const events = this.processEvents(result.browsingHistory[currentDate]);
-
-        // Sort events by duration in descending order
-        const sortedEvents = events.sort((a, b) => b.duration - a.duration);
-
-        // Load the three longest events
-        const longestEvents = sortedEvents.slice(0, 3);
-        longestEvents.forEach((event) => this.calendar.addEvent(event));
-
-        // Find the fourth event with the same name as the current webpage
-        const currentWebpageName = document.getElementById('pageName').innerText;
-        const fourthEvent = events.find((event) => event.name === currentWebpageName);
-
-        // Load the fourth event if found
-        if (fourthEvent) {
-          this.calendar.addEvent(fourthEvent);
-        }
-        */
-  }
-  
+    */
+  }  
 }
 
 customElements.define('timer-component', WebpageTimer);
