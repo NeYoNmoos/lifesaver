@@ -15,6 +15,7 @@ headerTemplate.innerHTML = `
 </header>
 `
 
+
 class ChartComponent extends HTMLElement {
     constructor() {
         super();
@@ -38,7 +39,9 @@ class ChartComponent extends HTMLElement {
         shadowRoot.appendChild(chartScript);
         
         const chartJS = document.createElement('script');
-        chartJS.src = 'https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js';
+        chartJS.src = chrome.runtime.getURL(
+            "/packages/chart-js/dist/index.d.js"
+          );
         shadowRoot.appendChild(chartJS);
 
         // Create the chart within the component
