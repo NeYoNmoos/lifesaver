@@ -56,14 +56,19 @@ function loadEvents() {
         browsingTime[today][url] = {};
       }
       console.log(url);
-      for(session of url){
-        time += browsingHistory;
-      }
-      console.log(parseInt(time));
-      
+      for (const visit of browsingHistory[today][url]) {
+        const duration = visit['duration'];
+        time += duration;
+    }
+      time = time/1000;//ms to seconds
+      time = time/60;//seconds to minutes
+      console.log(time);
+
+      browsingTime[today][url]['time']=time;
+    
       // You can perform other operations with the URLs here if needed
     }
-    console.log(browsingTime)
+    
     chrome.storage.local.set({ "browsingTime": browsingTime });
     }
   
