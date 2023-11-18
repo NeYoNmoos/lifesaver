@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function openDetailPage() {
   console.log("should open page");
-  chrome.tabs.create({ url: chrome.runtime.getURL("./pages/homepage.html") });
+  chrome.tabs.create({ url: chrome.runtime.getURL("./pages/summary.html") });
 }
 
 function loadEvents() {
