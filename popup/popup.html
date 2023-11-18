@@ -14,6 +14,10 @@
       .btn-blue:hover {
         @apply bg-blue-700;
       }
+      .main-container {
+        height: 500px !important;
+        width: 500px !important;
+      }
     </style>
     <link href="/dist/styles.css" rel="stylesheet" />
     <script type="module" src="/components/timer-component.js"></script>
@@ -21,30 +25,12 @@
   </head>
   <body class="bg-gray-100 main-container">
     <div class="p-8">
-      <div class="h-32">
-        <timer-component id="2"></timer-component>
+      <div class="flex flex-row justify-between ">
+        <h1 class="text-5xl">Summary</h1>
       </div>
-      <div class="h-32">
-        <timer-component id="1"></timer-component>
+      <div id="summary" class="p-8">
       </div>
-      <div class="h-32"></div>
       <button class="btn btn-blue" id="openTabButton">Details</button>
     </div>
   </body>
 </html>
-
-<style>
-  .btn {
-    @apply font-bold py-2 px-4 rounded;
-  }
-  .btn-blue {
-    @apply bg-blue-500 text-white;
-  }
-  .btn-blue:hover {
-    @apply bg-blue-700;
-  }
-  .main-container {
-    height: 500px !important;
-    width: 500px !important;
-  }
-</style>
