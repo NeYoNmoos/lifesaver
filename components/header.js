@@ -7,7 +7,7 @@ headerTemplate.innerHTML = `
 
 </style>
 <header class="bg-accent h-screen flex flex-col">
-    <a id="summary" class="text-xl font-semibold px-10 py-5" href="homepage.html">Summary</a>
+    <a id="summary" class="text-xl font-semibold px-10 py-5" href="summary.html">Summary</a>
     <a id="calendar" class="text-xl border-t border-accent font-semibold px-10 py-5" href="calendar.html">Calendar</a>
     <a id="limits" class="text-xl border-t border-accent font-semibold px-10 py-5" href="limits.html">Limits</a>
     <a id="statistics" class="text-xl border-t border-accent font-semibold px-10 py-5" href="statistics.html">Statistics</a>
