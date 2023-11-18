@@ -40,7 +40,6 @@ function updateTimeSpent() {
       duration: timeSpent,
       favicon: getFaviconUrl(activeDomain),
     });
-
     chrome.storage.local.set({ browsingHistory }, function () {
       console.log(
         `Browsing history updated for ${activeDomain} on ${currentDate}`

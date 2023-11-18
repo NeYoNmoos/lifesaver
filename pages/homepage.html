@@ -7,6 +7,8 @@
     <title>Lifesaver</title>
     <script src="../components/header.js"></script>
     <script src="../components/calendar-component.js" type="module"></script>
+    <script src="../components/usageBar.js" type="module"></script>
+
 
     <style>
       .load-text{
@@ -34,17 +36,16 @@
     <header-component></header-component>
     <main>
       <div>
-        <h1>Summary</h1>
-        <h1>Daily</h1>
-        <chart-componet>
-
+        <div height="1000px" width="1000px">
           <chart-component
-          height="300"
-          width="500"
-          timeformat="h"
-          timeonline="10"
-          timeleft="5"
-        ></chart-component>
+              height=300
+              width=500
+              timeformat="h"
+              timeonline=10
+              timeleft=0
+          ></chart-component>
+      </div>
+          
 
         <calendar-component></calendar-component>
 
