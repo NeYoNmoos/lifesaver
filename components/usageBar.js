@@ -15,17 +15,18 @@ headerTemplate.innerHTML = `
 </header>
 `
 
+
 class ChartComponent extends HTMLElement {
     constructor() {
         super();
         let height = this.getAttribute("height");
         let width = this.getAttribute("width");
         let timeformat = this.getAttribute('timeformat');
-        let timeonline = this.getAttribute('timeonline');
-        let timeleft = this.getAttribute('timeleft');
+        let timeonline = [parseInt(this.getAttribute('timeonline'))];
+        let timeleft = [parseInt(this.getAttribute('timeleft'))];
         // Create a shadow root for the component
         const shadowRoot = this.attachShadow({ mode: 'open' });
-
+        console.log(timeleft);
         // Define HTML content for the component
         shadowRoot.innerHTML = `
             <div class="chart-container">
@@ -38,7 +39,9 @@ class ChartComponent extends HTMLElement {
         shadowRoot.appendChild(chartScript);
         
         const chartJS = document.createElement('script');
-        chartJS.src = 'https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js';
+        chartJS.src = chrome.runtime.getURL(
+            "/packages/chart-js//chart.js"
+          );
         shadowRoot.appendChild(chartJS);
 
         // Create the chart within the component
@@ -51,7 +54,7 @@ class ChartComponent extends HTMLElement {
                     labels: [''],
                     datasets: [{
                         label: 'Time Spent',
-                        data: timeonline,
+                        data: [1],
                         backgroundColor: [
                             '#ca2e2e',
                         ],
@@ -61,7 +64,7 @@ class ChartComponent extends HTMLElement {
                         label: 'Time Left',
                         data: timeleft,
                         backgroundColor: [
-                            '#d16f6f',
+                            '#4287f5',
                         ],
                     }],
                 },
@@ -88,7 +91,7 @@ class ChartComponent extends HTMLElement {
                                     tooltipItems.forEach(function(tooltipItem) {
                                         sum += tooltipItem.parsed.x; // Access 'y' value directly for the 'y' axis
                                     });
-                                    return 'Total: ' + sum + ' ' + timeformat;
+                                    return 'Limit: ' + sum + ' ' + timeformat;
                                 }
                             }
                         },
