@@ -54,7 +54,7 @@ class ChartComponent extends HTMLElement {
                     labels: [''],
                     datasets: [{
                         label: 'Time Spent',
-                        data: [1],
+                        data: timeonline,
                         backgroundColor: [
                             '#ca2e2e',
                         ],
