@@ -14,9 +14,9 @@ webpageTimer.innerHTML = `
   }
 </style>
 <div class="page-component">
-  <p class="text-gray-600" id="pageName">Current page name</p>
+  <p class="text-gray-600">Current page name</p>
   <div class="flex space-x-4 items-center mt-4 edit-container">
-    <img class="w-16 h-16 border" id="imageSource" src="your-image-source.jpg">
+    <!--<img class="w-16 h-16 border" id="imageSource" src="your-image-source.jpg">-->
     <canvas class="w-16 h-16 border"></canvas>
     <input class="w-24 px-2 py-1 border" style="display: none;">
     <button class="bg-blue-500 text-white px-4 py-2 rounded">
@@ -36,9 +36,12 @@ class WebpageTimer extends HTMLElement {
       }
 
   connectedCallback() {
-    
+    /*
     const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.appendChild(webpageTimer.content);
+    */
+    this.innerHTML = webpageTimer.innerHTML;
+    
 /*
     // Get elements inside the shadow DOM
     const editButton = shadowRoot.querySelector('.bg-blue-500');
