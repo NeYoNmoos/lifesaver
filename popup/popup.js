@@ -29,20 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     return events;
   }
-/*
-  function loadEvent() {
-    chrome.storage.local.get(["browsingHistory"], (result) => {
-      if (result.browsingHistory) {
-        var events = processEvents(result.browsingHistory);
-        events = events.sort((a, b) => b.duration - a.duration);
-        events = events.slice(0, 3);
-
-        events.forEach((event) => {
-          summary.appendChild(new WebpageTimer());
-        });
-      }
-    });
-  }*/
 
   function loadEvent() {
     return new Promise((resolve) => {
@@ -59,6 +45,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  function subtractTime(timeString1, timeString2) {
+    const date1 = new Date(timeString1);
+    const date2 = new Date(timeString2);
+
+    // Calculate the time difference in milliseconds
+    const timeDifference = date1 - date2;
+
+    // Convert the time difference to hours and minutes
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    console.log(hours);
+
+    const formattedResult = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+
+    return formattedResult;
+  }
   
   loadEvent().then((events) => {
     for(let indexEvent = 0; indexEvent < events.length; indexEvent++){
@@ -78,96 +80,32 @@ document.addEventListener('DOMContentLoaded', function() {
         @apply px-2 py-1 border;
       }
     </style>
-    <div class="page-component">
-      <p class="text-gray-600">${events[indexEvent].title}</p>
-      <div class="flex space-x-4 items-center mt-4 edit-container">
-        <img class="w-16 h-16 border" id="imageSource" src="${events[indexEvent].icon}">
-        <div class="chart-container">
-          <canvas id="${"myChart" + indexEvent}"></canvas>
-        </div>
-        <input class="w-24 px-2 py-1 border" style="display: none;">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded">
-          <i class="fas fa-pen"></i> Edit
-        </button>
-        <button class="bg-red-500 text-white px-4 py-2 rounded">
-          <i class="fas fa-ban"></i> Block
-        </button>
-      </div>
-    </div>`
+    <div class="page-component mb-6">
+          <p class="text-2xl text-text">${events[indexEvent].title}</p>
+          <div class="flex space-x-4 items-center mt-4 edit-container">
+            <img class="w-16 h-16 border" id="imageSource" src="${events[indexEvent].icon}">
+            <div class="chart-container">
+              <table class="text-base">
+                <tr>
+                  <td class="px-2 py-1">timeonline</td>
+                  <td class="px-2 py-1">${subtractTime(events[indexEvent].end, events[indexEvent].start)}</td>
+                </tr>
+                <tr>
+                  <td class="px-2 py-1">limit</td>
+                  <td class="px-2 py-1">24h</td>
+                </tr>
+              </table>
+              <input class="w-32 text-center px-1 mx-1 py-2 text-base border" style="display: none;">
+            </div>
+            <button class="bg-blue-500 text-white text-base px-4 py-2 rounded">
+              <i class="fas fa-pen"></i> Edit
+            </button>
+            <button class="bg-red-500 text-white text-base px-4 py-2 rounded">
+              <i class="fas fa-ban"></i> Block
+            </button>
+          </div>
+        </div>`
       summary.insertAdjacentHTML('beforeend', child);
-      drawGraph("myChart" + indexEvent,'h',10,20);
     }
   });
-
-  const chartJS = document.createElement('script');
-  chartJS.src = 'https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js';
-  
-  function drawGraph(chartID, timeformat, timeleft, timeonline){
-    chartJS.onload = () => {
-      const branches_canvas = document.getElementById(chartID);
-
-      const branches = new Chart(branches_canvas, {
-          type: 'bar',
-          data: {
-              labels: [''],
-              datasets: [{
-                  label: 'Time Spent',
-                  data: [timeonline],
-                  backgroundColor:[ 
-                      '#ca2e2e',
-                  ],
-                  hoverOffset: 0
-              },
-              {
-                  label: 'Time Left',
-                  data: [timeleft],
-                  backgroundColor: [
-                      '#d16f6f',
-                  ],
-              }],
-          },
-          options: {
-              indexAxis: 'y',
-              plugins: {
-                  legend: {
-                      display: false // Hide the legend
-                  },
-                  tooltip: {
-                      callbacks: {
-                          label: function(context) {
-                              let label = context.dataset.label || '';
-                              if (label) {
-                                  label += ': ';
-                              }
-                              if (context.parsed.y !== null) {
-                                  label += context.parsed.x + timeformat;
-                              }
-                              return label;
-                          },
-                          footer: function(tooltipItems, data) {
-                              let sum = 0;
-                              tooltipItems.forEach(function(tooltipItem) {
-                                  sum += tooltipItem.parsed.x; // Access 'y' value directly for the 'y' axis
-                              });
-                              return 'Total: ' + sum + ' ' + timeformat;
-                          }
-                      }
-                  },
-              },
-              scales: {
-                  x: {
-                      display: true,
-                      stacked: true
-                  },
-                  y: {
-                      display: false,
-                      stacked: true
-                  }
-              },
-          }
-      });
-  };
-  }
-
-  loadEvent();
 });
