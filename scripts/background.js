@@ -1,7 +1,7 @@
 let startTime;
 let activeDomain;
 let browsingHistory = {};
-const MINIMUM_DURATION_MS = 30000; // 30 seconds threshold
+const MINIMUM_DURATION_MS = 10000; // 30 seconds threshold
 
 function getDomain(url) {
   try {
