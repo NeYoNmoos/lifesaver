@@ -7,42 +7,90 @@
     <title>Lifesaver</title>
     <script src="../components/header.js"></script>
     <script src="../components/usageBar.js" type="module"></script>
-
     <style>
-      .load-text{
-        @apply text-text
+      .load-text {
+        @apply text-text;
       }
 
-      .load-background{
-        @apply bg-background
+      .load-background {
+        @apply bg-background;
       }
 
-      .load-bg-primary{
-          @apply bg-primary
+      .load-bg-primary {
+        @apply bg-primary;
       }
 
-      .load-bg-secondary{
-          @apply bg-secondary
+      .load-bg-secondary {
+        @apply bg-secondary;
       }
 
-      .load-accent{
-          @apply bg-accent
+      .load-accent {
+        @apply bg-accent;
       }
     </style>
   </head>
-    <body class="bg-background h-screen flex flex-row">
-        <header-component page="statistics"></header-component>
-        <main class="grow p-10">
-          <div class="flex flex-row justify-between ">
-            <h1 class="text-5xl">Statistics</h1>
-            <chart-component
-            height=300
-            width=500
+  <body class="bg-background h-screen flex flex-row">
+    <header-component page="statistics"></header-component>
+    <main class="grow p-10">
+      <div class="flex flex-row justify-between">
+        <h1 class="text-5xl">Statistics</h1>
+      </div>
+      <div>
+        <div width="10px" height="10px">
+          <chart-component
+            height="10px"
+            width="100px"
             timeformat="h"
-            timeonline=10
-            timeleft=80
-            ></chart-component> 
-          </div>
-        </main>
-    </body>
+            timeonline="200"
+            timeleft="0"
+          ></chart-component>
+        </div>
+        <div>
+          <chart-component
+            height="10px"
+            width="100px"
+            timeformat="min"
+            timeonline="10"
+            timeleft="20"
+          ></chart-component>
+        </div>
+        <div>
+          <chart-component
+            height="10px"
+            width="100px"
+            timeformat="h"
+            timeonline="5"
+            timeleft="0"
+          ></chart-component>
+        </div>
+        <div>
+          <chart-component
+            height="10px"
+            width="100px"
+            timeformat="min"
+            timeonline="50"
+            timeleft="10"
+          ></chart-component>
+        </div>
+        <div>
+          <chart-component
+            height="10px"
+            width="100px"
+            timeformat="h"
+            timeonline="5"
+            timeleft="0"
+          ></chart-component>
+        </div>
+        <div>
+          <chart-component
+            height="10px"
+            width="100px"
+            timeformat="h"
+            timeonline="2"
+            timeleft="5"
+          ></chart-component>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
