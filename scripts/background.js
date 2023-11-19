@@ -1,6 +1,7 @@
 let startTime;
 let activeDomain;
 let browsingHistory = {};
+const MINIMUM_DURATION_MS = 10000; // 30 seconds threshold
 
 function getDomain(url) {
   try {
@@ -24,28 +25,32 @@ function updateTimeSpent() {
   if (activeDomain && startTime) {
     const endTime = Date.now();
     const timeSpent = endTime - startTime;
-    const currentDate = getCurrentDate();
 
-    if (!browsingHistory[currentDate]) {
-      browsingHistory[currentDate] = {};
+    if (timeSpent >= MINIMUM_DURATION_MS) {
+      // Check if the duration meets the minimum threshold
+      const currentDate = getCurrentDate();
+
+      if (!browsingHistory[currentDate]) {
+        browsingHistory[currentDate] = {};
+      }
+
+      if (!browsingHistory[currentDate][activeDomain]) {
+        browsingHistory[currentDate][activeDomain] = [];
+      }
+
+      browsingHistory[currentDate][activeDomain].push({
+        start: new Date(startTime).toISOString(),
+        end: new Date(endTime).toISOString(),
+        duration: timeSpent,
+        favicon: getFaviconUrl(activeDomain),
+      });
+
+      chrome.storage.local.set({ browsingHistory }, function () {
+        console.log(
+          `Browsing history updated for ${activeDomain} on ${currentDate}`
+        );
+      });
     }
-
-    if (!browsingHistory[currentDate][activeDomain]) {
-      browsingHistory[currentDate][activeDomain] = [];
-    }
-
-    browsingHistory[currentDate][activeDomain].push({
-      start: new Date(startTime).toISOString(),
-      end: new Date(endTime).toISOString(),
-      duration: timeSpent,
-      favicon: getFaviconUrl(activeDomain),
-    });
-
-    chrome.storage.local.set({ browsingHistory }, function () {
-      console.log(
-        `Browsing history updated for ${activeDomain} on ${currentDate}`
-      );
-    });
 
     startTime = undefined; // Reset startTime for the next session
   }

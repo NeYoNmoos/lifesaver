@@ -25,7 +25,14 @@ class CalendarComponent extends HTMLElement {
       // Initialize FullCalendar
       this.calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "timeGridWeek",
-        // Add other FullCalendar options here
+        slotDuration: "00:05:00", // Each slot will represent 15 minutes
+        slotLabelInterval: "01:00",
+        eventDidMount: function (info) {
+          // Using the title attribute for the tooltip
+          let tooltip =
+            info.event.extendedProps.description || info.event.title;
+          info.el.setAttribute("title", tooltip);
+        },
       });
 
       this.calendar.render();

@@ -6,6 +6,8 @@
     <link href="/dist/styles.css" rel="stylesheet" />
     <title>Lifesaver</title>
     <script src="../components/header.js"></script>
+    <script src="../components/usageBar.js" type="module"></script>
+
     <style>
       .load-text{
         @apply text-text
@@ -33,6 +35,13 @@
         <main class="grow p-10">
           <div class="flex flex-row justify-between ">
             <h1 class="text-5xl">Statistics</h1>
+            <chart-component
+            height=300
+            width=500
+            timeformat="h"
+            timeonline=10
+            timeleft=80
+            ></chart-component> 
           </div>
         </main>
     </body>
